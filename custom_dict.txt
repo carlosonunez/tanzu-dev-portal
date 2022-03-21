@@ -18,7 +18,6 @@
 12SwitchRestoresSansCheckOuts
 2x2
 3D
-Salatino
 [23]G
 401K
 [245]xx
@@ -2154,8 +2153,8 @@ WomenOfDotNet
 [wW]ordpress
 WORKDIR
 WorkloadEndpoint
-[Ww]orkstream(s)?
 [Ww]orkspace(s)?
+[Ww]orkstream(s)?
 writeout
 WSL
 Wujec('s)

@@ -82,11 +82,11 @@ is another similar log helper tool. For most debugging purposes, try to limit th
 cognitive overload that may distract you from finding the real problem.  
 
     If you cannot access the cluster, check the log aggregation
-platform. For example, Splunk or ELK if they are setup. From the log
-platforms, try searching by the node name/IP and/or components such as `kubelet`
-and `kube-proxy`.  If the cluster is not accessible because `kubectl` commands
-do not work, you must access the cluster nodes to find more details.  
-See ["Accessing nodes"](#accessing-nodes) for more information.
+platform, if the cluster is connected to one. For example, Splunk or ELK if they 
+are setup. From the log platforms, try searching by the node name/IP and/or 
+components such as `kubelet` and `kube-proxy`.  If the cluster is not accessible 
+because `kubectl` commands do not work, you must access the cluster nodes to 
+find more details. See ["Accessing nodes"](#accessing-nodes) for more information.
 
 4. If the cluster is still accessible and existing logs pinpoints to another
 system issue, it is possible to access the pod container to perform tests such
@@ -133,7 +133,7 @@ kubectl exec -it -n netshoot "--" sh -c "clear; (bash || ash || sh)"
 
 However, this is a new pod that does not have access to a
 target pod's filesystem. This approach is useful for debugging aspects such as
-network connectivity. A deep dive of these aspects as classes is explored in
+network connectivity. A deep dive of these aspects as problem sources are explored in
 the next learning path on Heuristic Approach.
 
 ### Using Ephemeral Debug Containers
@@ -153,8 +153,8 @@ ephemeral containers are helpful for troubleshooting issues. By default, the
 enabled](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/)
 as a beta in Kubernetes 1.23. Otherwise, you must enable the feature-gate first before it can be used. 
 The documentation for [debug containers](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/#ephemeral-container)
-use examples to demonstrate how to use `debug containers`. It is included as follows, along with content aligning to this
-article.
+show usage examples demonstrating how to use `debug containers`.  It is included 
+as follows, along with content aligning to this article.
 
 Ephemeral containers are similar to regular containers. The difference is that they are
 limited in functionality. For example, ephemeral containers have no restart capability, 
@@ -165,7 +165,7 @@ Compared to what was previously done with `netshoot` and `kubectl exec`, the key
 feature here is that an ephemeral container can be attached to a pod that you 
 want to debug. For example, the target pod, by [sharing it's process
 namespace](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/).
-This means that it is possible to see a target debug a pod container's processes
+This means that it is possible to see a target pod container's processes
 and filesystem. There are a number of variations of the `kubectl debug`
 command. Its usage depends on what is required for debugging. One
 additional note to consider is that the debug containers continue to run
@@ -190,9 +190,9 @@ other existing running container. This is usually the same name as the pod.
 
 #### The Target Container Has Crashed or Completed and/or Does Not Have a Shell
 
-This scenario introduces the problem where a container has crashed or completed, 
-and presents a problem with debugging because it is not possible to `kubectl
-exec` because the container no longer exists. You can address this by making a
+This scenario introduces the problem where a container has crashed or completed 
+and it is not possible to `kubectl exec` into a container because the container 
+no longer exists. You can address this by making a
 copy of the target pod attached with an ephemeral container to inspect its
 process and filesystem. Use the following command.
 
@@ -206,10 +206,11 @@ namespace in a new pod, named `<new-name-of-existing-pod>` as a copy of
 
 #### The Target Container Has Crashed or Completed, and the Container Start Command Needs to be Changed
 
-This scenario is different from the previous one about the startup command change
-because there is no additional debug ephemeral container. Instead, there is a copy 
-of the target pod. This is particularly useful for situations where a target container
-has crashed or ends immediately on startup. The goal is to interactively
+This scenario is different from the previous one, in that the startup command 
+needs to be changed to ensure that a container remains running or additional information is
+extracted. This is achieved through a copied target pod without affecting the original
+target pod. One situation where this is particularly useful is when a target container
+has crashed or ends immediately on startup and the goal is to interactively
 tryout the process or review its filesystem. To do this, the startup
 command requires a change that does not end the container, or a command 
 that helps to provide more information. For example, changing the debug verbosity
@@ -221,7 +222,7 @@ kubectl debug <name-of-existing-pod> -it --copy-to=<new-name-of-existing-pod> --
 ```
 
 Take note of the command specifier `-- sh`. The example changes the start
-command to call the shell on the copied container. This may need to be replaced
+command to call the shell on the `copied container`. This may need to be replaced
 with an appropriate start command that enables debugging of the pod.
 
 #### The Target Container Needs to Utilize a Different Container Image

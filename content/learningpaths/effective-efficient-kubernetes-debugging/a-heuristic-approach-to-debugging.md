@@ -35,12 +35,12 @@ The following are the top six sources of problems in the field:
 - **DNS**: [Domain Name System (DNS)](https://en.wikipedia.org/wiki/Domain_Name_System)
  resolves the hostname to IP addresses. An example of a common issue is when an application is unable to reach the DNS server, or when the DNS server doesn't contain the record. There are also less obvious issues seen in the field. For example, a bug in base OS images that doesn't allow DNS IPV4, but does allow IPV6.
 - **Certificates** - A simple idea with highly complex components
- marred by varying implementations and different nomenclatures provides
+ marred by varying implementations and different nomenclatures leads to 
  a difficult and confusing concept to understand.
  
    It is highly recommended that you have a good understanding of how
- certificate work is developed. The key requirement is a formation of a
- valid chain of trust that starts on a host from a server/lead certificate to
+ certificates work. The key concept is a formation of a
+ valid chain of trust that starts on a host from a server/leaf certificate to
  multiple intermediate certificates, and finally, a Root/CA
  certificate. It is through a formed trust, that an encrypted communication
  session can begin between a host and a server. This [Kaspersky
@@ -53,9 +53,9 @@ The following are the top six sources of problems in the field:
    The following is an example of directly querying `www.google.com` and building
  a trust chain from the perspective of the host computer.
  
-   Note the certificate tree is going from the server/lead certificate
- (top) to the pre installed root certificate where the `Subject` and `Issuer`
- are identical on the host computer's trust store (bottom).
+   Note the certificate tree is going from the server/leaf certificate
+ (top) to the pre-installed root certificate where the `Subject` and `Issuer`
+ are identical on the host computer's system trust store (bottom).
  
    ```sh
       ./cert info --host www.google.com 443
@@ -111,7 +111,7 @@ This section describes how to use the heuristic approach to debug the top six co
  
 If information gleaned from the initial debugging workflow yielded no results, or had
 multiple possibilities, you could start to reason about where to begin and use
-the sources as heuristic to help pin-point the cause of your problems, for example, NTP.
+the sources as heuristic to help pin-point the cause of your problems, for example, DNS.
 The next part in the series of this learning path dives deeper into refining heuristic 
 through context test debugging.
  
@@ -124,7 +124,7 @@ Test validations and tools are required to use heuristics. The following are a c
    nc -vz <ip-of-dns> 53
    ```
  
-   This command can be used to check connectivity to a DNS server. Alternatively, 
+   can be used to check connectivity to a DNS server. Alternatively, 
 you can use `ping <fqdn>` to check if a hostname can be resolved. This is usually indicated on the
 first line of the ping output. You can also use similar tools, such as `dig`, `nslookup`
 or `host` commands to test access to DNS or to see if the DNS server can
@@ -261,7 +261,7 @@ route misconfiguration on a host. There are several ways to do this, depending o
        traceroute <ip_address>
    ```
  
-   On Windows, the command is `tracert`.  Note that this uses ICMP ECHO by
+   On Windows, the command is `tracert`.  Note that `tracert`/`traceroute` uses ICMP ECHO by
 default. Consult the `main` page for your version of `traceroute` to find options
 that enable TCP- or UDP-based `traceroute` and ensure that ICMP packets are allowed.
 

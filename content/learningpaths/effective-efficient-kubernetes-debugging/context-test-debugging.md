@@ -30,7 +30,7 @@ In this section, you will learn:
 ## Refined Heuristics with Context Test Debugging
  
 The most important aspect to consider is, "Where do you look in a large system?".
-We describe this as the contest. It is possible to infer and search for all areas previously described
+We describe this as the context. It is possible to infer and search for all areas previously described
 without context. However, sustainable debugging of systems is best served with a good
 understanding of how a system works, followed by debugging practices to become
 proficient and efficient. Understanding how a system works means you know 
@@ -125,7 +125,7 @@ are no 'bad ideas', and that it’s OK if ideas are duplicated independent of ot
  
 4. **Grouping**: The facilitator reads each sticky note aloud, then asks the
 participant who wrote it to explain the idea and the reason. The facilitator
-then moves the sticky note to the `Grouping & Priority` area. Group ideas that overlap
+then moves the sticky note to the `Grouping and Priority` area. Group ideas that overlap
 together.
  
   ![Grouping the sticky notes](/learningpaths/effective-efficient-kubernetes-debugging/images/debugging-kubernetes-dands-group.png#center)
@@ -149,4 +149,3 @@ interacting components or systems. If there is a bug, reach out to support.
 For example, IaaS providers and support is required from them if they
 are not part of the current group of participants.
  
-   ![Grouping the sticky notes](/learningpaths/effective-efficient-kubernetes-debugging/images/debugging-kubernetes-dands-group.png#center)
